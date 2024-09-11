@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class QSvgAsset extends StatelessWidget {
-  const QSvgAsset({
+class QSvgWidget extends StatelessWidget {
+  const QSvgWidget({
     super.key,
     required this.assetPath,
     this.color,
-    this.height = 26.0,
-    this.width = 26.0,
+    this.height,
+    this.width,
     this.boxFit = BoxFit.contain,
   });
 
@@ -28,6 +28,7 @@ class QSvgAsset extends StatelessWidget {
     );
   }
 
+  /// Using [BlendMode.srcIn] because there are no use cases elsewhere
   ColorFilter? get _colorFilter {
     if (color == null) return null;
 

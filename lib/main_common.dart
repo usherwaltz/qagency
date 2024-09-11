@@ -1,29 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'blocs/blocs.dart';
 import 'flavor_config.dart';
 import 'router/router.dart';
 
 Future<void> mainCommon() async {
-  runApp(const MyApp());
+  runApp(const QAgency());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class QAgency extends StatelessWidget {
+  const QAgency({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      child: MaterialApp.router(
-        title: FlavorConfig.instance.values.appTitle,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'SFPro',
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<ThemeBloc>(
+            create: (context) => ThemeBloc(),
+          ),
+          BlocProvider<MoviesBloc>(
+            create: (context) => MoviesBloc(),
+          ),
+        ],
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            return MaterialApp.router(
+              title: FlavorConfig.instance.values.appTitle,
+              debugShowCheckedModeBanner: false,
+              theme: state.palette.light,
+              darkTheme: state.palette.dark,
+              themeMode: state.themeMode,
+              routerConfig: router,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+            );
+          },
         ),
-        routerConfig: router,
       ),
     );
   }
