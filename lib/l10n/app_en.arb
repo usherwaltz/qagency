@@ -1,5 +1,6 @@
 {
   "popular": "Popular",
   "movies": "Movies",
-  "favourites": "Favourites"
+  "favourites": "Favourites",
+  "somethingWentWrong": "Oops! Something went wrong."
 }
