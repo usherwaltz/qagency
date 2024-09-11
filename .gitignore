@@ -48,3 +48,6 @@ app.*.map.json
 # Freezed files
 *.g.dart
 *.freezed.dart
+
+# Generated localization files
+/lib/l10n/generated

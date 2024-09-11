@@ -22,7 +22,7 @@ class FlavorConfig {
       flavor: Flavor.production,
       values: FlavorValues(
         appTitle: 'QAgency',
-        apiUrl: 'https://api.themoviedb.org/3',
+        apiUrl: 'https://api.themoviedb.org/3/',
         posterUrl: 'https://image.tmdb.org/t/p/w500',
       ),
     );
@@ -33,7 +33,7 @@ class FlavorConfig {
       flavor: Flavor.development,
       values: FlavorValues(
         appTitle: 'QAgency Dev',
-        apiUrl: 'https://dev.api.themoviedb.org/3',
+        apiUrl: 'https://dev.api.themoviedb.org/3/',
         posterUrl: 'https://dev.image.tmdb.org/t/p/w500',
       ),
     );

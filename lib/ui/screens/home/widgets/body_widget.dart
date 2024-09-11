@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:qagency/utils/context_extension.dart';
 
 import '../../../../assets/assets.dart';
 import '../../../../blocs/blocs.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../widgets/widgets.dart';
 import 'widgets.dart';
 
