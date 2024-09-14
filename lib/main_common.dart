@@ -22,7 +22,8 @@ class QAgency extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<ThemeBloc>(
-            create: (context) => ThemeBloc(),
+            lazy: false,
+            create: (context) => ThemeBloc()..add(const ThemeLoaded()),
           ),
           BlocProvider<MoviesBloc>(
             lazy: false,
@@ -33,7 +34,7 @@ class QAgency extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => FavouritesBloc(),
-          )
+          ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {

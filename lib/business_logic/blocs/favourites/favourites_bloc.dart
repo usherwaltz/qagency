@@ -14,7 +14,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
 
   FavouritesBloc() : super(FavouritesState.initial()) {
     on<FavouritesLoaded>(_onFavouritesLoaded);
-    on<FavouritesSaved>(_onFavouritesSaved);
+    on<FavouritesUpdated>(_onFavouritesUpdated);
   }
 
   Future<void> _onFavouritesLoaded(
@@ -35,24 +35,26 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
     }
   }
 
-  Future<void> _onFavouritesSaved(
-    FavouritesSaved event,
+  Future<void> _onFavouritesUpdated(
+    FavouritesUpdated event,
     Emitter<FavouritesState> emit,
   ) async {
     try {
-      logger.i('Favourites Saved :: Movie => ${event.movie}');
+      logger.i(
+        'Favourites Updated :: \nMovie => ${event.movie} \n Movie name => ${event.movie.title}',
+      );
 
-      Set<MovieModel> movies = List<MovieModel>.from(state.movies).toSet();
+      List<MovieModel> movies = List<MovieModel>.from(state.movies);
 
       if (movies.contains(event.movie)) {
         await _databaseRepository.deleteFavourite(event.movie.id);
-        movies.remove(event.movie);
+        movies.removeWhere((e) => e.id == event.movie.id);
       } else {
         await _databaseRepository.storeFavourite(event.movie.id);
         movies.add(event.movie);
       }
 
-      emit(state.copyWith(movies: movies.toList()));
+      emit(state.copyWith(movies: movies));
     } catch (e) {
       emit(state.copyWith(
         uiStatus: BlocStateUIStatus.error,

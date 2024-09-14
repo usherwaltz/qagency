@@ -18,6 +18,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
     return BlocProvider(
+      lazy: false,
       create: (context) => AppBloc()..add(const AppInitialized()),
       child: BlocConsumer<AppBloc, AppState>(
         listener: (context, state) {

@@ -15,11 +15,19 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     on<ThemeModeChanged>(_onThemeModeChanged);
   }
 
-  void _onThemeLoaded(
+  Future<void> _onThemeLoaded(
     ThemeLoaded event,
     Emitter<ThemeState> emit,
-  ) {
-    emit(state.copyWith());
+  ) async {
+    final storedMode = await SharedPreferencesUtil.instance.getString(
+      Constants.themeMode,
+    );
+
+    if (storedMode == null) return;
+
+    emit(state.copyWith(
+      themeMode: _stringToMode(storedMode),
+    ));
   }
 
   Future<void> _onThemeModeChanged(
@@ -35,5 +43,18 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     SharedPreferencesUtil.instance.setString(Constants.themeMode, newMode.name);
 
     emit(state.copyWith(themeMode: newMode));
+  }
+
+  ThemeMode _stringToMode(String mode) {
+    switch (mode.toLowerCase()) {
+      case 'dark':
+        return ThemeMode.dark;
+
+      case 'light':
+        return ThemeMode.light;
+
+      default:
+        return ThemeMode.system;
+    }
   }
 }

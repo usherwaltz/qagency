@@ -4,7 +4,7 @@ part of 'favourites_bloc.dart';
 class FavouritesEvent with _$FavouritesEvent {
   const factory FavouritesEvent.loaded() = FavouritesLoaded;
 
-  const factory FavouritesEvent.saved({
+  const factory FavouritesEvent.updated({
     required MovieModel movie,
-  }) = FavouritesSaved;
+  }) = FavouritesUpdated;
 }

@@ -25,7 +25,7 @@ class QImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = context.select<ThemeBloc, Color>((bloc) {
-      return bloc.state.palette.text;
+      return bloc.state.palette.getColors(context).text;
     });
 
     return BlocProvider<MovieBloc>(
@@ -68,8 +68,8 @@ class QImageWidget extends StatelessWidget {
     return Image(
       image: MemoryImage(image),
       fit: fit ?? BoxFit.cover,
-      height: height ?? 100.sp,
-      width: width ?? 100.sp,
+      height: height,
+      width: width,
       loadingBuilder: (context, child, loadingProgress) {
         return Center(child: child);
       },
@@ -91,8 +91,8 @@ class QImageWidget extends StatelessWidget {
       enabled: true,
       child: Container(
         color: Colors.black,
-        height: height ?? 100.sp,
-        width: width ?? 100.sp,
+        height: height,
+        width: width,
       ),
     );
   }
@@ -100,8 +100,8 @@ class QImageWidget extends StatelessWidget {
   Widget _buildEmpty(Color color) {
     return Center(
       child: Container(
-        height: height ?? 100.sp,
-        width: width ?? 100.sp,
+        height: height,
+        width: width,
         decoration: BoxDecoration(
           border: Border.all(color: color),
           borderRadius: BorderRadius.circular(4.sp),

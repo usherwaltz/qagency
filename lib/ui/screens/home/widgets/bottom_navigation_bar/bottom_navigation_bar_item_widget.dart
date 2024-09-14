@@ -21,8 +21,9 @@ class BottomNavigationBarItemWidget extends StatelessWidget {
     final currentLayout = context.select<HomeLayoutBloc, HomeLayout>(
       (bloc) => bloc.state.layout,
     );
-    final palette = context.select<ThemeBloc, QPalette>(
-      (bloc) => bloc.state.palette,
+
+    final palette = context.select<ThemeBloc, ColorPalette>(
+      (bloc) => bloc.state.palette.getColors(context),
     );
 
     final color = _getColor(currentLayout, palette);
@@ -90,7 +91,7 @@ class BottomNavigationBarItemWidget extends StatelessWidget {
 
   Color _getColor(
     HomeLayout currentLayout,
-    QPalette palette,
+    ColorPalette palette,
   ) {
     return currentLayout == layout ? palette.primary : palette.text;
   }

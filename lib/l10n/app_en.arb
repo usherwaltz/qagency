@@ -16,5 +16,9 @@
     }
   },
   "noData": "No data available at the moment.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "length": "Length",
+  "language": "Language",
+  "movieRating": "Rating",
+  "description": "Description"
 }
