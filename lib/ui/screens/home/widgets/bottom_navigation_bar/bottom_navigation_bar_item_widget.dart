@@ -45,9 +45,7 @@ class BottomNavigationBarItemWidget extends StatelessWidget {
                   height: 2.0.sp,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2.0.sp),
-                    color: currentLayout == layout
-                        ? palette.primary
-                        : Colors.transparent,
+                    color: currentLayout == layout ? palette.primary : Colors.transparent,
                   ),
                 ),
               ),
@@ -58,7 +56,7 @@ class BottomNavigationBarItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     QSvgWidget(
-                      assetPath: Assets.movie,
+                      assetPath: _getIcon(),
                       height: 24.sp,
                       color: color,
                     ),
@@ -77,6 +75,10 @@ class BottomNavigationBarItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getIcon() {
+    return layout == HomeLayout.movies ? Assets.movie : Assets.favouriteChecked;
   }
 
   String _getLabel(AppLocalizations strings) {
