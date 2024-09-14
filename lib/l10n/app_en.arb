@@ -1,6 +1,20 @@
 {
+  "@@locale": "en",
   "popular": "Popular",
   "movies": "Movies",
   "favourites": "Favourites",
-  "somethingWentWrong": "Oops! Something went wrong."
+  "somethingWentWrong": "Oops! Something went wrong.",
+  "offline": "Offline",
+  "mustConnectOnce": "You must have internet connection on the first launch.",
+  "rating": "{rating} / 10 IMDb",
+  "@rating": {
+    "placeholders": {
+      "rating": {
+        "type": "String",
+        "example": "7.2"
+      }
+    }
+  },
+  "noData": "No data available at the moment.",
+  "retry": "Retry"
 }

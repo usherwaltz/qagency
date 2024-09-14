@@ -1,4 +1,8 @@
+enum HomeLayout { movies, favourites }
+
 enum BlocStateUIStatus { initial, loading, loadingMore, loaded, error }
+
+enum BlocStateUIAction { none, navigateToNext }
 
 /// Commonly seen status codes
 enum ResponseTypes {

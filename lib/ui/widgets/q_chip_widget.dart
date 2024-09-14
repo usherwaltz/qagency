@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qagency/utils/context_extension.dart';
+
+import '../../utils/utils.dart';
 
 class QChipWidget extends StatelessWidget {
   const QChipWidget(this.text, {super.key});

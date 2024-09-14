@@ -1,37 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qagency/l10n/generated/app_localizations.dart';
 
 import '../../../assets/assets.dart';
-import '../../../router/routes.dart';
+import '../../../business_logic/blocs/blocs.dart';
+import '../../../config/router/routes.dart';
+import '../../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(seconds: 3));
-      if (!mounted) return;
-      context.go(Routes.home);
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: QSvgWidget(
-          assetPath: Assets.logo,
-          height: 80.sp,
-        ),
+    final strings = AppLocalizations.of(context)!;
+    return BlocProvider(
+      create: (context) => AppBloc()..add(const AppInitialized()),
+      child: BlocConsumer<AppBloc, AppState>(
+        listener: (context, state) {
+          if (state.uiAction == BlocStateUIAction.navigateToNext) {
+            context.go(Routes.home);
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            body: SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  QSvgWidget(
+                    assetPath: Assets.logo,
+                    height: 80.sp,
+                  ),
+                  if (state.uiStatus == BlocStateUIStatus.error) ...[
+                    Gap(20.0.sp),
+                    Text(
+                      strings.somethingWentWrong,
+                      style: context.textTheme.headlineLarge,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
