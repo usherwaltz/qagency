@@ -17,11 +17,17 @@ dependencies:
   go_router: ^14.2.7
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
-  cached_network_image: ^3.4.1
   dio: ^5.7.0
   logger: ^2.4.0
   flutter_dotenv: ^5.1.0
   gap: ^3.0.1
+  shimmer: ^3.0.0
+  drift: ^2.20.2
+  drift_flutter: ^0.1.0
+  connectivity_plus: ^6.0.5
+  shared_preferences: ^2.3.2
+  rxdart: ^0.28.0
+  image: ^4.2.0
   cupertino_icons: ^1.0.8
   flutter_localizations:
     sdk: flutter
@@ -32,6 +38,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^4.0.0
+  drift_dev: ^2.20.3
   build_runner: ^2.4.12
   freezed: ^2.5.7
   json_serializable: ^6.8.0

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'blocs/blocs.dart';
-import 'flavor_config.dart';
+import 'business_logic/blocs/blocs.dart';
+import 'config/flavor_config.dart';
+import 'config/router/router.dart';
 import 'l10n/generated/app_localizations.dart';
-import 'router/router.dart';
 
 Future<void> mainCommon() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const QAgency());
 }
 
@@ -24,8 +25,15 @@ class QAgency extends StatelessWidget {
             create: (context) => ThemeBloc(),
           ),
           BlocProvider<MoviesBloc>(
+            lazy: false,
             create: (context) => MoviesBloc(),
           ),
+          BlocProvider(
+            create: (context) => HomeLayoutBloc(),
+          ),
+          BlocProvider(
+            create: (context) => FavouritesBloc(),
+          )
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
