@@ -26,6 +26,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         SharedPreferencesUtil.instance.initialize(),
       ]);
 
+      // adding this line because the splash screen is way too short
+      await Future.delayed(const Duration(seconds: 1));
+
       emit(state.copyWith(
         uiAction: BlocStateUIAction.navigateToNext,
       ));
