@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,20 +39,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: const BottomNavigationBarWidget(),
-      body: BlocListener<HomeLayoutBloc, HomeLayoutState>(
-        listenWhen: (p, c) => p.layout != c.layout,
-        listener: (context, state) {
-          _pageController.jumpToPage(
-            HomeLayout.values.indexOf(state.layout),
-          );
-        },
-        child: PageView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _pageController,
-          itemCount: HomeLayout.values.length,
-          itemBuilder: (context, index) => _getContent(index),
+    return SafeArea(
+      left: false,
+      top: false,
+      right: false,
+      bottom: Platform.isIOS,
+      child: Scaffold(
+        bottomNavigationBar: const BottomNavigationBarWidget(),
+        body: BlocListener<HomeLayoutBloc, HomeLayoutState>(
+          listenWhen: (p, c) => p.layout != c.layout,
+          listener: (context, state) {
+            _pageController.jumpToPage(
+              HomeLayout.values.indexOf(state.layout),
+            );
+          },
+          child: PageView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _pageController,
+            itemCount: HomeLayout.values.length,
+            itemBuilder: (context, index) => _getContent(index),
+          ),
         ),
       ),
     );

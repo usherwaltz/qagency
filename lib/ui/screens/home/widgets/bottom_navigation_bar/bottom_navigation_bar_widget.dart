@@ -34,7 +34,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 strings.offline,
-                style: context.textTheme.bodySmall,
+                style: context.textTheme.bodySmall?.copyWith(
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

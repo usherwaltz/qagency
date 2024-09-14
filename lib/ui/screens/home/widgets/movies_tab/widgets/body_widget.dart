@@ -43,14 +43,16 @@ class _BodyWidgetState extends State<BodyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final palette =
-        context.select<ThemeBloc, QPalette>((bloc) => bloc.state.palette);
+    final palette = context.select<ThemeBloc, ColorPalette>((bloc) {
+      return bloc.state.palette.getColors(context);
+    });
+
     return BlocBuilder<MoviesBloc, MoviesState>(
       buildWhen: (p, c) => p.movies != c.movies,
       builder: (context, state) {
         final isEnd = state.page == state.totalPages;
         return RefreshIndicator(
-          color: palette.text,
+          color: Colors.white,
           backgroundColor: palette.primary,
           onRefresh: _reloadData,
           child: state.movies.isNotEmpty

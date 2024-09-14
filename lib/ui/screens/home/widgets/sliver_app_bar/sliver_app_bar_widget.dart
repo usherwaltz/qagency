@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qagency/utils/utils.dart';
 
 import '../../../../../assets/assets.dart';
+import '../../../../../business_logic/blocs/blocs.dart';
+import '../../../../../business_logic/repositories/repositories.dart';
 import '../../../../widgets/widgets.dart';
 import 'widgets/widgets.dart';
 
@@ -37,14 +41,20 @@ class _SliverAppBarWidgetState extends State<SliverAppBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.select<ThemeBloc, ColorPalette>((bloc) {
+      return bloc.state.palette.getColors(context);
+    });
     return SliverAppBar(
       automaticallyImplyLeading: true,
       pinned: true,
+      centerTitle: false,
       title: QSvgWidget(
         assetPath: Assets.logo,
         height: 28.sp,
+        color: palette.primary,
       ),
       flexibleSpace: FlexibleSpaceBar(
+        centerTitle: false,
         expandedTitleScale: 1,
         titlePadding: EdgeInsets.only(
           left: _titleIndent,

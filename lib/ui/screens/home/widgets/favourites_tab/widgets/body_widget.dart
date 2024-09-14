@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../../../business_logic/blocs/blocs.dart';
+import '../../../../../../business_logic/models/models.dart';
 import '../../../../../../business_logic/repositories/repositories.dart';
 import '../../../../../../ui/widgets/widgets.dart';
 import '../../../../../../utils/utils.dart';
@@ -14,36 +15,36 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette =
-        context.select<ThemeBloc, QPalette>((bloc) => bloc.state.palette);
+    final palette = context.select<ThemeBloc, ColorPalette>((bloc) {
+      return bloc.state.palette.getColors(context);
+    });
+
+    final genres = context
+        .select<MoviesBloc, List<GenreModel>>((bloc) => bloc.state.genres);
+
     return BlocBuilder<FavouritesBloc, FavouritesState>(
       buildWhen: (p, c) => p.movies != c.movies,
       builder: (context, state) {
         return RefreshIndicator(
-          color: palette.text,
+          color: Colors.white,
           backgroundColor: palette.primary,
           onRefresh: () async {
-            return context
-                .read<MoviesBloc>()
-                .add(const MoviesLoaded(refresh: true));
+            return context.read<FavouritesBloc>().add(const FavouritesLoaded());
           },
           child: state.movies.isNotEmpty
-              ? BlocBuilder<MoviesBloc, MoviesState>(
-                  builder: (context, moviesState) {
-                    return ListView.separated(
-                      key: PageStorageKey<String>(HomeLayout.movies.name),
-                      padding:
-                          EdgeInsets.fromLTRB(16.0.sp, 0.0, 16.0.sp, 16.0.sp),
-                      itemCount: state.movies.length,
-                      separatorBuilder: (context, index) => Gap(20.0.sp),
-                      itemBuilder: (context, index) {
-                        final movie = state.movies[index];
+              ? ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  key: PageStorageKey<String>(HomeLayout.movies.name),
+                  padding: EdgeInsets.fromLTRB(16.0.sp, 0.0, 16.0.sp, 16.0.sp),
+                  itemCount: state.movies.length,
+                  separatorBuilder: (context, index) => Gap(20.0.sp),
+                  itemBuilder: (context, index) {
+                    final movie = state.movies[index];
 
-                        final genres = movie.getGenres(moviesState.genres);
-
-                        return MovieListItemWidget(
-                            movie: movie, genres: genres);
-                      },
+                    return MovieListItemWidget(
+                      key: ValueKey(movie.id),
+                      movie: movie,
+                      genres: movie.getGenres(genres),
                     );
                   },
                 )
