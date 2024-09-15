@@ -41,11 +41,11 @@ Depending on your preferred code editor, you'll need the flutter plugin to run t
 
 ### Android Studio Target Configuration
 1. From the top ribbon open the dart entry point dropdown menu and select **Edit Configurations**:
-   ![Edit Configuration Option](https://drive.google.com/file/d/1hv_3Ulpa1g9ddV2ZVHMWnTuwUpEDIdfh/view?usp=drive_link)
+   ![Edit Configuration Option](https://photos.app.goo.gl/vZisygqbZuRB3m1AA)
 2. In the new windows click on the **"+"** icon in the top left and select **Flutter** from the dropdown.
-   ![New Configuration Menu](https://drive.google.com/file/d/1Uwn5z3At_350oBvYQvf9EZ-mcgnOFW4e/view?usp=sharing)
+   ![New Configuration Menu](https://photos.app.goo.gl/L4pnpqFnwuBUeANW9)
 3. A new target will appear in your left pane. Populate the fields as follows:
-   ![Target Configuration](https://drive.google.com/file/d/1woXSl11UTpLQ3LYdq-vHMwg5Q5NZTCoZ/view?usp=sharing)
+   ![Target Configuration](https://photos.app.goo.gl/qRnScZEe9VjzsN3d7)
 
 Replace <PATH_TO_YOUR_PROJECT> with the actual path to the project on your machine.
 Replace "production" with "development" for development environment.
@@ -57,30 +57,30 @@ Replace "production" with "development" for development environment.
 2. Copy and paste following json into the newly created launch.json:
 
 ```json
-{  
-	"version": "0.2.0",  
-	"configurations": [  
-		{  
-			"name": "Production",  
-			"request": "launch",  
-			"type": "dart",  
-			"program": "lib/main_production.dart",  
-			"args": [  
-				"--flavor",  
-				"production"  
-			]  
-		},  
-		{  
-			"name": "Development",  
-			"request": "launch",  
-			"type": "dart",  
-			"program": "lib/main_development.dart",  
-			"args": [  
-				"--flavor",  
-				"development"  
-			]  
-		}  
-	]  
+{
+   "version": "0.2.0",
+   "configurations": [
+      {
+         "name": "Production",
+         "request": "launch",
+         "type": "dart",
+         "program": "lib/main_production.dart",
+         "args": [
+            "--flavor",
+            "production"
+         ]
+      },
+      {
+         "name": "Development",
+         "request": "launch",
+         "type": "dart",
+         "program": "lib/main_development.dart",
+         "args": [
+            "--flavor",
+            "development"
+         ]
+      }
+   ]
 }
 ```
 
