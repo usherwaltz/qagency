@@ -43,9 +43,9 @@ Depending on your preferred code editor, you'll need the flutter plugin to run t
 1. From the top ribbon open the dart entry point dropdown menu and select **Edit Configurations**:
    ![Edit Configuration Option](https://lh3.googleusercontent.com/pw/AP1GczPIXvOAEFDAp74XU77tD9NseJH1kTcRtYVVjuHhLCa8jbiAul25qaHdryHx5Dyp5ELejWdhx28wmC6BwxfWRZAdwAsH5Z65T1PQ99CRrLjdxbxPVEA61iatQLd5lYNpLx7s5qkQAp6Sf-pSLOVYzXthJA=w185-h112-s-no-gm?authuser=0)
 2. In the new windows click on the **"+"** icon in the top left and select **Flutter** from the dropdown.
-   ![New Configuration Menu](https://photos.app.goo.gl/L4pnpqFnwuBUeANW9)
+   ![New Configuration Menu](https://photos.fife.usercontent.google.com/pw/AP1GczNS3cp49JU3DvTFurVMu6L2msamfw0KCASL8-JprFfYGCnC3R9zxS0jZg=w265-h332-s-no-gm?authuser=0)
 3. A new target will appear in your left pane. Populate the fields as follows:
-   ![Target Configuration](https://photos.app.goo.gl/qRnScZEe9VjzsN3d7)
+   ![Target Configuration](https://photos.fife.usercontent.google.com/pw/AP1GczOrWLL9kB6qkV16n4qhfyl0C2bqxVV2IpO5S_1rJ8Hx7opa50u0lFmw7A=w683-h410-s-no-gm?authuser=0)
 
 Replace <PATH_TO_YOUR_PROJECT> with the actual path to the project on your machine.
 Replace "production" with "development" for development environment.
