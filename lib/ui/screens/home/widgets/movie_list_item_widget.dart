@@ -58,6 +58,7 @@ class MovieListItemWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildTitleAndRating(context, strings),
+              Gap(12.sp),
               QFavouriteButtonWidget(movie),
             ],
           ),

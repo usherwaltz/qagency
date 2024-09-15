@@ -24,6 +24,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   final _sheet = GlobalKey();
   final _controller = DraggableScrollableController();
   final double _initialChildSize = 0.6134;
+  late double _minChildSize;
   late double _maxChildSize;
   late MediaQueryData _mediaQuery;
   late List<GenreModel> _genres;
@@ -31,15 +32,16 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   @override
   void didChangeDependencies() {
     _mediaQuery = MediaQuery.of(context);
-    _computeMaxSize();
+    _computeChildSize();
     _getGenres();
     super.didChangeDependencies();
   }
 
-  void _computeMaxSize() {
+  void _computeChildSize() {
     final screenHeight = _mediaQuery.size.height;
     final height = screenHeight - _mediaQuery.viewPadding.top - kToolbarHeight;
     _maxChildSize = height / screenHeight;
+    _minChildSize = _initialChildSize / 2;
   }
 
   void _getGenres() => _genres = context.read<MoviesBloc>().state.genres;
@@ -50,21 +52,32 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        _buildHeaderImage(),
-        _buildBackButton(),
-        _buildDragSheet(),
-      ],
+    return Scaffold(
+      body: Stack(
+        children: [
+          _buildHeaderImage(),
+          _buildBackButton(),
+          _buildDragSheet(),
+        ],
+      ),
     );
   }
 
   Widget _buildHeaderImage() {
     return Positioned(
       top: 0,
-      child: ImageWidget(
-        movie: widget.movie,
-        maxHeight: _maxChildSize,
+      child: GestureDetector(
+        onTap: () {
+          _controller.animateTo(
+            _minChildSize,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        },
+        child: ImageWidget(
+          movie: widget.movie,
+          maxHeight: _maxChildSize,
+        ),
       ),
     );
   }
@@ -90,9 +103,10 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
         key: _sheet,
         initialChildSize: _initialChildSize,
         maxChildSize: _maxChildSize,
-        minChildSize: _initialChildSize,
+        minChildSize: _minChildSize,
         expand: true,
         snap: true,
+        snapSizes: [_initialChildSize / 2, _initialChildSize, _maxChildSize],
         builder: (context, controller) {
           return _buildDecoration(
             child: CustomScrollView(
