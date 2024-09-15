@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qagency/utils/utils.dart';
 
 import '../../assets/assets.dart';
 import '../../business_logic/blocs/blocs.dart';
 import '../../business_logic/models/models.dart';
 import '../../business_logic/repositories/repositories.dart';
+import '../../utils/utils.dart';
 import 'widgets.dart';
 
 class QFavouriteButtonWidget extends StatelessWidget {

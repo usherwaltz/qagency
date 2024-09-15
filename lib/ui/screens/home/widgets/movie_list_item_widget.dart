@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qagency/config/router/routes.dart';
 
 import '../../../../assets/assets.dart';
 import '../../../../business_logic/models/models.dart';
+import '../../../../config/router/routes.dart';
 import '../../../../l10n/generated/app_localizations.dart';
 import '../../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qagency/utils/utils.dart';
 
 import 'business_logic/blocs/blocs.dart';
 import 'config/flavor_config.dart';
 import 'config/router/router.dart';
 import 'l10n/generated/app_localizations.dart';
+import 'utils/utils.dart';
 
 Future<void> mainCommon() async {
   WidgetsFlutterBinding.ensureInitialized();

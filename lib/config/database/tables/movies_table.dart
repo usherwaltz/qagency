@@ -32,8 +32,7 @@ class ListConverter extends TypeConverter<List<int>, String> {
   @override
   List<int> fromSql(String fromDb) {
     final List<dynamic> jsonList = jsonDecode(fromDb);
-    return jsonList
-        .cast<int>(); // Safely cast the dynamic list to a list of integers
+    return jsonList.cast<int>();
   }
 
   @override

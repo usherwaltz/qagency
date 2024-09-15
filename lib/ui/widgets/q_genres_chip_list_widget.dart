@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qagency/business_logic/models/genre/genre_model.dart';
 
+import '../../business_logic/models/models.dart';
 import 'widgets.dart';
 
 class QGenresChipListWidget extends StatelessWidget {
