@@ -48,7 +48,7 @@ class QErrorWidget extends StatelessWidget {
                 strings.retry,
                 style: context.textTheme.displayMedium,
               ),
-            )
+            ),
           ],
         ],
       ),

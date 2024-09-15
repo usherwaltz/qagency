@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart' as drift;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:qagency/config/database/app_database.dart';
+
+import '../../../config/database/app_database.dart';
 
 part 'genre_model.freezed.dart';
 part 'genre_model.g.dart';

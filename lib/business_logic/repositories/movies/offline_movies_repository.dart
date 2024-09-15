@@ -8,16 +8,28 @@ class OfflineMoviesRepository implements MoviesRepository {
 
   @override
   Future<List<GenreModel>> getGenres() async {
-    return await _databaseRepository.getGenres();
+    try {
+      return await _databaseRepository.getGenres();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<MoviesListResponseModel> getPopular({required int page}) async {
-    return await _databaseRepository.getMovies(page: page);
+    try {
+      return await _databaseRepository.getMovies(page: page);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<Uint8List?> getPosterBytes({required String posterPath}) async {
-    return Uint8List(0);
+    try {
+      return Uint8List(0);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

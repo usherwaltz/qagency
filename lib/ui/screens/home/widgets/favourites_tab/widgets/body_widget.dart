@@ -13,6 +13,10 @@ import '../../widgets.dart';
 class BodyWidget extends StatelessWidget {
   const BodyWidget({super.key});
 
+  Future<void> _reloadData(BuildContext context) async {
+    return context.read<FavouritesBloc>().add(const FavouritesLoaded());
+  }
+
   @override
   Widget build(BuildContext context) {
     final palette = context.select<ThemeBloc, ColorPalette>((bloc) {
@@ -28,9 +32,7 @@ class BodyWidget extends StatelessWidget {
         return RefreshIndicator(
           color: Colors.white,
           backgroundColor: palette.primary,
-          onRefresh: () async {
-            return context.read<FavouritesBloc>().add(const FavouritesLoaded());
-          },
+          onRefresh: () async => _reloadData(context),
           child: state.movies.isNotEmpty
               ? ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),

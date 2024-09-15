@@ -19,15 +19,18 @@ class _MoviesTabWidgetState extends State<MoviesTabWidget>
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [SliverAppBarWidget(_scrollController)];
-        },
-        body: BlocSelector<MoviesBloc, MoviesState, BlocStateUIStatus>(
+      body: NestedScrollViewWrapperWidget(
+        scrollController: _scrollController,
+        child: BlocSelector<MoviesBloc, MoviesState, BlocStateUIStatus>(
           selector: (state) => state.uiStatus,
           builder: (context, uiStatus) {
             switch (uiStatus) {

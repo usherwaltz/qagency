@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../business_logic/models/models.dart';
 import '../../utils/utils.dart';
+import '../flavor_config.dart';
 import 'interceptors/interceptors.dart';
 
 /// All RESTful methods
@@ -22,7 +23,7 @@ class DioClient {
   }
 
   static final _options = BaseOptions(
-    baseUrl: 'https://api.themoviedb.org/3/',
+    baseUrl: FlavorConfig.instance.values.apiUrl,
     connectTimeout: const Duration(seconds: 15),
     receiveTimeout: const Duration(seconds: 15),
   );
@@ -92,7 +93,7 @@ class DioClient {
     final statusCode = response?.statusCode;
     final data = response?.data;
     final statusMessage = response?.statusMessage;
-    logger.i("Response: $statusCode => $data => $statusMessage");
+    logger.i("Response :: $statusCode :: $statusMessage \nDATA :: => $data");
 
     if (response != null) {
       return APIResponseModel(

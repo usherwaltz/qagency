@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -24,6 +25,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   final _sheet = GlobalKey();
   final _controller = DraggableScrollableController();
   final double _initialChildSize = 0.6134;
+  late double _minChildSize;
   late double _maxChildSize;
   late MediaQueryData _mediaQuery;
   late List<GenreModel> _genres;
@@ -31,115 +33,127 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   @override
   void didChangeDependencies() {
     _mediaQuery = MediaQuery.of(context);
-    _computeMaxSize();
+    _computeChildSize();
     _getGenres();
     super.didChangeDependencies();
   }
 
-  void _computeMaxSize() {
+  void _computeChildSize() {
     final screenHeight = _mediaQuery.size.height;
-
     final height = screenHeight - _mediaQuery.viewPadding.top - kToolbarHeight;
-
     _maxChildSize = height / screenHeight;
+    _minChildSize = _initialChildSize / 2;
   }
 
-  void _getGenres() {
-    _genres = context.read<MoviesBloc>().state.genres;
+  void _getGenres() => _genres = context.read<MoviesBloc>().state.genres;
+
+  EdgeInsets get _contentPadding {
+    return EdgeInsets.fromLTRB(16.0.sp, 28.sp, 16.sp, 0);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: 0,
-          child: Stack(
-            children: [
-              QImageWidget(
-                movie: widget.movie,
-                width: _mediaQuery.size.width,
-              ),
-              Container(
-                height: _mediaQuery.size.height * (1.0 - _maxChildSize),
-                width: _mediaQuery.size.width,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.black45,
-                      Colors.black12,
-                      Colors.transparent
-                    ],
-                    stops: [0, 0.7, 1.0],
-                    begin: Alignment(0.5, 0),
-                    end: Alignment(0.5, 1.0),
-                  ),
-                ),
-              )
-            ],
-          ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            _buildHeaderImage(),
+            _buildBackButton(),
+            _buildDragSheet(),
+          ],
         ),
-        Positioned(
-          top: kToolbarHeight.sp - 24.sp,
-          left: 16.sp,
-          child: IconButton(
-            onPressed: () => context.pop(),
-            icon: QSvgWidget(
-              assetPath: Assets.back,
-              width: 24.sp,
-            ),
-          ),
+      ),
+    );
+  }
+
+  Widget _buildHeaderImage() {
+    return Positioned(
+      top: 0,
+      child: GestureDetector(
+        onTap: () {
+          _controller.animateTo(
+            _minChildSize,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        },
+        child: ImageWidget(
+          movie: widget.movie,
+          maxHeight: _maxChildSize,
         ),
-        Positioned.fill(
-          child: DraggableScrollableSheet(
-            controller: _controller,
-            key: _sheet,
-            initialChildSize: _initialChildSize,
-            maxChildSize: _maxChildSize,
-            minChildSize: _initialChildSize,
-            expand: true,
-            snap: true,
-            builder: (context, controller) {
-              return DecoratedBox(
-                decoration: BoxDecoration(
-                  color: context.theme.scaffoldBackgroundColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.sp),
-                    topRight: Radius.circular(20.sp),
-                  ),
-                ),
-                child: CustomScrollView(
-                  controller: controller,
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                          16.0.sp,
-                          28.sp,
-                          16.sp,
-                          0,
+      ),
+    );
+  }
+
+  Widget _buildBackButton() {
+    return Positioned(
+      top: kToolbarHeight.sp - 24.sp,
+      left: 16.sp,
+      child: IconButton(
+        onPressed: () => context.pop(),
+        icon: QSvgWidget(
+          assetPath: Assets.back,
+          width: 24.sp,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDragSheet() {
+    return Positioned.fill(
+      child: DraggableScrollableSheet(
+        controller: _controller,
+        key: _sheet,
+        initialChildSize: _initialChildSize,
+        maxChildSize: _maxChildSize,
+        minChildSize: _minChildSize,
+        expand: true,
+        snap: true,
+        snapSizes: [_initialChildSize / 2, _initialChildSize, _maxChildSize],
+        builder: (context, controller) {
+          return _buildDecoration(
+            child: CustomScrollView(
+              controller: controller,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: _contentPadding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        HeadlineWidget(widget.movie),
+                        Gap(16.sp),
+                        QGenresChipListWidget(
+                          widget.movie.getGenres(_genres),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            HeadlineWidget(widget.movie),
-                            Gap(16.sp),
-                            QGenresChipListWidget(
-                              widget.movie.getGenres(_genres),
-                            ),
-                            Gap(40.sp),
-                            DescriptionWidget(widget.movie.overview),
-                          ],
-                        ),
-                      ),
+                        Gap(40.sp),
+                        DescriptionWidget(widget.movie.overview),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              );
-            },
-          ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildDecoration({required Widget child}) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: context.theme.scaffoldBackgroundColor,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.sp),
+          topRight: Radius.circular(20.sp),
         ),
-      ],
+      ),
+      child: child,
     );
   }
 }

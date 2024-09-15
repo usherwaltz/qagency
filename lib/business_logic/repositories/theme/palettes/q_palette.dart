@@ -20,6 +20,7 @@ abstract class QPalette {
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: palette.bottomNavBarColor,
           selectedItemColor: palette.primary,
+          unselectedItemColor: palette.text,
         ),
         iconTheme: IconThemeData(color: palette.text),
         cardColor: palette.primaryFaded,
