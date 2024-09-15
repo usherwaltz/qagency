@@ -15,28 +15,36 @@ class OnlineMoviesRepository implements MoviesRepository {
   Future<MoviesListResponseModel> getPopular({
     required int page,
   }) async {
-    final apiResponse = await _dio.get(
-      MovieEndpoints.popular(page),
-    );
+    try {
+      final apiResponse = await _dio.get(
+        MovieEndpoints.popular(page),
+      );
 
-    if (apiResponse.isSuccessful) {
-      return MoviesListResponseModel.fromJson(apiResponse.data);
+      if (apiResponse.isSuccessful) {
+        return MoviesListResponseModel.fromJson(apiResponse.data);
+      }
+
+      return const MoviesListResponseModel();
+    } catch (e) {
+      rethrow;
     }
-
-    return const MoviesListResponseModel();
   }
 
   @override
   Future<List<GenreModel>> getGenres() async {
-    final apiResponse = await _dio.get(
-      MovieEndpoints.genres,
-    );
+    try {
+      final apiResponse = await _dio.get(
+        MovieEndpoints.genres,
+      );
 
-    if (apiResponse.isSuccessful) {
-      return GenresListResponseModel.fromJson(apiResponse.data).genres;
+      if (apiResponse.isSuccessful) {
+        return GenresListResponseModel.fromJson(apiResponse.data).genres;
+      }
+
+      return [];
+    } catch (e) {
+      rethrow;
     }
-
-    return [];
   }
 
   @override

@@ -19,6 +19,7 @@ class BodyWidget extends StatefulWidget {
 }
 
 class _BodyWidgetState extends State<BodyWidget> {
+  // Do not dispose here
   late ScrollController _scrollController;
 
   @override
@@ -30,9 +31,10 @@ class _BodyWidgetState extends State<BodyWidget> {
   void _setupListener() {
     _scrollController = widget.scrollController;
     _scrollController.addListener(() {
-      if (_scrollController.offset >=
-          _scrollController.position.maxScrollExtent) {
-        if (mounted) context.read<MoviesBloc>().add(const MoviesLoaded());
+      final offset = _scrollController.offset;
+      final maxExtent = _scrollController.position.maxScrollExtent;
+      if (offset >= maxExtent && mounted) {
+        context.read<MoviesBloc>().add(const MoviesLoaded());
       }
     });
   }
@@ -67,8 +69,9 @@ class _BodyWidgetState extends State<BodyWidget> {
                       return QConnectionWrapperWidget(
                         buildWhenOffline: false,
                         child: Center(
-                          child:
-                              CircularProgressIndicator(color: palette.primary),
+                          child: CircularProgressIndicator(
+                            color: palette.primary,
+                          ),
                         ),
                       );
                     }

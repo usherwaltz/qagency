@@ -16,25 +16,25 @@ class FavouritesTabWidget extends StatefulWidget {
 
 class _FavouritesTabWidgetState extends State<FavouritesTabWidget> {
   final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
-    _loadData();
+    context.read<FavouritesBloc>().add(const FavouritesLoaded());
     super.initState();
   }
 
-  void _loadData() {
-    context.read<FavouritesBloc>().add(const FavouritesLoaded());
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [SliverAppBarWidget(_scrollController)];
-        },
-        body: BlocSelector<FavouritesBloc, FavouritesState, BlocStateUIStatus>(
+      body: NestedScrollViewWrapperWidget(
+        scrollController: _scrollController,
+        child: BlocSelector<FavouritesBloc, FavouritesState, BlocStateUIStatus>(
           selector: (state) => state.uiStatus,
           builder: (context, uiStatus) {
             switch (uiStatus) {

@@ -40,10 +40,25 @@ class SplashScreen extends StatelessWidget {
                     height: 80.sp,
                   ),
                   if (state.uiStatus == BlocStateUIStatus.error) ...[
-                    Gap(20.0.sp),
+                    Gap(20.sp),
                     Text(
                       strings.somethingWentWrong,
                       style: context.textTheme.headlineLarge,
+                    ),
+                    Gap(20.0.sp),
+                    ElevatedButton(
+                      style: context.theme.elevatedButtonTheme.style?.copyWith(
+                        backgroundColor: WidgetStatePropertyAll(
+                          context.theme.colorScheme.error,
+                        ),
+                      ),
+                      onPressed: () {
+                        context.read<AppBloc>().add(const AppInitialized());
+                      },
+                      child: Text(
+                        strings.retry,
+                        style: context.textTheme.displayMedium,
+                      ),
                     ),
                   ],
                 ],

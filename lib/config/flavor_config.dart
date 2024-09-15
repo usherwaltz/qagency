@@ -33,8 +33,9 @@ class FlavorConfig {
       flavor: Flavor.development,
       values: FlavorValues(
         appTitle: 'QAgency Dev',
-        apiUrl: 'https://dev.api.themoviedb.org/3/',
-        posterUrl: 'https://dev.image.tmdb.org/t/p/w500',
+        // same as production (only here for demonstration purposes)
+        apiUrl: 'https://api.themoviedb.org/3/',
+        posterUrl: 'https://image.tmdb.org/t/p/w500',
       ),
     );
   }

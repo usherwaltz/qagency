@@ -20,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _setupPageController();
-
     _loadData();
     super.initState();
   }

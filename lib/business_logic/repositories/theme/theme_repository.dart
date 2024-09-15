@@ -1,9 +1,3 @@
-import 'palettes/palettes.dart';
-
-export 'palettes/palettes.dart';
-
-class ThemeRepository {
-  static List<QPalette> palettes = [
-    Blue(),
-  ];
-}
+export 'palettes/blue.dart';
+export 'palettes/color_palette.dart';
+export 'palettes/q_palette.dart';
