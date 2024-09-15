@@ -43,9 +43,9 @@ Depending on your preferred code editor, you'll need the flutter plugin to run t
 1. From the top ribbon open the dart entry point dropdown menu and select **Edit Configurations**:
    ![Edit Configuration Option](https://lh3.googleusercontent.com/pw/AP1GczPIXvOAEFDAp74XU77tD9NseJH1kTcRtYVVjuHhLCa8jbiAul25qaHdryHx5Dyp5ELejWdhx28wmC6BwxfWRZAdwAsH5Z65T1PQ99CRrLjdxbxPVEA61iatQLd5lYNpLx7s5qkQAp6Sf-pSLOVYzXthJA=w185-h112-s-no-gm?authuser=0)
 2. In the new windows click on the **"+"** icon in the top left and select **Flutter** from the dropdown.
-   ![New Configuration Menu](https://photos.fife.usercontent.google.com/pw/AP1GczNS3cp49JU3DvTFurVMu6L2msamfw0KCASL8-JprFfYGCnC3R9zxS0jZg=w265-h332-s-no-gm?authuser=0)
+   ![New Configuration Menu](https://lh3.googleusercontent.com/pw/AP1GczNJvDtkQo-iIjYk5d4Zi3wI0aIh_RpXlAGrnCSvZyoZEQIpU42dVjHAnfSf-1QC_9LWN7vMpIwJSnNdXYY8QWbEzkBqCfQEn59oHcnkFGzsPmyujd-n53ln8V3JDio6ap8K7b43knyYiHl0eyjQa1azmw=w265-h332-s-no-gm?authuser=0)
 3. A new target will appear in your left pane. Populate the fields as follows:
-   ![Target Configuration](https://photos.fife.usercontent.google.com/pw/AP1GczOrWLL9kB6qkV16n4qhfyl0C2bqxVV2IpO5S_1rJ8Hx7opa50u0lFmw7A=w683-h410-s-no-gm?authuser=0)
+   ![Target Configuration](https://lh3.googleusercontent.com/pw/AP1GczPcfINB_FV0EvqCtiYm03OHhDlZdzK44O7bjQtvPeoG9IB49RZ9UVETvspvd62hLwhE0Oy6gY-ZMDTx55S8vav-crkrC4k6iJg_UaApkLgzqQXBHIwFm4EJjg4G4R1cdUl-J7ATE-Q336rsu_yO5pPJ0A=w683-h410-s-no-gm?authuser=0)
 
 Replace <PATH_TO_YOUR_PROJECT> with the actual path to the project on your machine.
 Replace "production" with "development" for development environment.
@@ -53,7 +53,7 @@ Replace "production" with "development" for development environment.
 ### Visual Studio Code Target Configuration
 
 1. From the top ribbon bar click on **Run -> Add Configuration...**
-   ![Add Configuration](https://drive.google.com/file/d/1P2rdpk4NIn9L4XI9ZJvZrOX2T6jh2QoH/view?usp=sharing)
+   ![Add Configuration](https://lh3.googleusercontent.com/pw/AP1GczP5zrmX0nRjAxMT6P1M6Dw-dqg0Tqb0rTanSeeK1sVCH_Vh6nqgDgrGUGwSlszAR6AaGK30224pNbsVS9O-ibHraMyvkYwEGTsi2BZzdeDRE7d-epJ9Qi4Ij7ghS3tPNfOT5_eRCnd0WSOJrWaUmVkf4w=w368-h506-s-no-gm?authuser=0)
 2. Copy and paste following json into the newly created launch.json:
 
 ```json
