@@ -58,7 +58,7 @@ Replace "production" with "development" for development environment.
    ![Add Configuration](https://lh3.googleusercontent.com/pw/AP1GczP5zrmX0nRjAxMT6P1M6Dw-dqg0Tqb0rTanSeeK1sVCH_Vh6nqgDgrGUGwSlszAR6AaGK30224pNbsVS9O-ibHraMyvkYwEGTsi2BZzdeDRE7d-epJ9Qi4Ij7ghS3tPNfOT5_eRCnd0WSOJrWaUmVkf4w=w368-h506-s-no-gm?authuser=0)
 
 2. Copy and paste **the** following JSON into the newly created launch.json:
-3.
+
 ```json  
 {  
 	"version": "0.2.0", 
