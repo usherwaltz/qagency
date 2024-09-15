@@ -39,6 +39,7 @@ Environment variables can be found in: **<PROJECT_ROOT>/lib/config/flavor_config
 Depending on your preferred code editor, you'll need the flutter plugin to run this project from an editor
 
 * [Android Studio Flutter Plugin](https://plugins.jetbrains.com/plugin/9212-flutter)
+* [Visual Studio Code Flutter Plugin](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter)
 
 ### Android Studio Target Configuration
 1. From the top ribbon open the dart entry point dropdown menu and select **Edit Configurations**:  
