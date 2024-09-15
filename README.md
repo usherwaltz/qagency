@@ -41,7 +41,7 @@ Depending on your preferred code editor, you'll need the flutter plugin to run t
 
 ### Android Studio Target Configuration
 1. From the top ribbon open the dart entry point dropdown menu and select **Edit Configurations**:
-   ![Edit Configuration Option](https://photos.app.goo.gl/vZisygqbZuRB3m1AA)
+   ![Edit Configuration Option](https://lh3.googleusercontent.com/pw/AP1GczPIXvOAEFDAp74XU77tD9NseJH1kTcRtYVVjuHhLCa8jbiAul25qaHdryHx5Dyp5ELejWdhx28wmC6BwxfWRZAdwAsH5Z65T1PQ99CRrLjdxbxPVEA61iatQLd5lYNpLx7s5qkQAp6Sf-pSLOVYzXthJA=w185-h112-s-no-gm?authuser=0)
 2. In the new windows click on the **"+"** icon in the top left and select **Flutter** from the dropdown.
    ![New Configuration Menu](https://photos.app.goo.gl/L4pnpqFnwuBUeANW9)
 3. A new target will appear in your left pane. Populate the fields as follows:
