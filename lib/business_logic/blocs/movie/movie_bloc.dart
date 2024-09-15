@@ -45,17 +45,19 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       if (!_initialized) await _connectionListener();
       emit(state.copyWith(uiStatus: BlocStateUIStatus.loading));
 
-      // Try to fetch image from localDB
-      final localImage = await _databaseRepository.getMoviePoster(
-        event.movieId,
-      );
+      if (!event.forceNetworkImage) {
+        // Try to fetch image from localDB
+        final localImage = await _databaseRepository.getMoviePoster(
+          event.movieId,
+        );
 
-      if (localImage != null) {
-        emit(state.copyWith(
-          uiStatus: BlocStateUIStatus.loaded,
-          bytes: localImage,
-        ));
-        return;
+        if (localImage != null) {
+          emit(state.copyWith(
+            uiStatus: BlocStateUIStatus.loaded,
+            bytes: localImage,
+          ));
+          return;
+        }
       }
 
       // If the user is offline emit error

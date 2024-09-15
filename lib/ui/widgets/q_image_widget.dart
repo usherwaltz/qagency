@@ -98,19 +98,32 @@ class QImageWidget extends StatelessWidget {
   }
 
   Widget _buildEmpty(Color color) {
-    return Center(
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          border: Border.all(color: color),
-          borderRadius: BorderRadius.circular(4.sp),
-        ),
-        child: Icon(
-          Icons.image,
-          color: color,
-        ),
-      ),
+    return StreamBuilder(
+      stream: ConnectionUtil.instance.connectionStream,
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data!) {
+          context.read<MovieBloc>().add(MoviePosterFetched(
+                movieId: movie.id,
+                posterPath: movie.posterPath,
+                forceNetworkImage: true,
+              ));
+        }
+
+        return Center(
+          child: Container(
+            height: height,
+            width: width,
+            decoration: BoxDecoration(
+              border: Border.all(color: color),
+              borderRadius: BorderRadius.circular(4.sp),
+            ),
+            child: Icon(
+              Icons.image,
+              color: color,
+            ),
+          ),
+        );
+      },
     );
   }
 }

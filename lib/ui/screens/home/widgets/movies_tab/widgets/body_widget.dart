@@ -84,9 +84,12 @@ class _BodyWidgetState extends State<BodyWidget> {
   }
 
   Widget _buildLoading(Color color) {
-    return Center(
-      child: CircularProgressIndicator(
-        color: color,
+    return QConnectionWrapperWidget(
+      buildWhenOffline: false,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: color,
+        ),
       ),
     );
   }

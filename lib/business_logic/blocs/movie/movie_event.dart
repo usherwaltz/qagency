@@ -5,5 +5,6 @@ class MovieEvent with _$MovieEvent {
   const factory MovieEvent.posterFetched({
     required int movieId,
     required String posterPath,
+    @Default(false) bool forceNetworkImage,
   }) = MoviePosterFetched;
 }
