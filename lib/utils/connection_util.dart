@@ -49,6 +49,8 @@ class ConnectionUtil {
       return false;
     } on SocketException {
       return false;
+    } catch (e) {
+      return false;
     }
   }
 
