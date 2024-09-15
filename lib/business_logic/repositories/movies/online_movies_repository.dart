@@ -14,10 +14,15 @@ class OnlineMoviesRepository implements MoviesRepository {
   @override
   Future<MoviesListResponseModel> getPopular({
     required int page,
+    String language = 'en_US',
   }) async {
     try {
       final apiResponse = await _dio.get(
-        MovieEndpoints.popular(page),
+        MovieEndpoints.popular,
+        queryParams: {
+          'page': page,
+          'language': language,
+        },
       );
 
       if (apiResponse.isSuccessful) {
