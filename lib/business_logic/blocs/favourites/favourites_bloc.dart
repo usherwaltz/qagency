@@ -26,6 +26,10 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
       emit(state.copyWith(uiStatus: BlocStateUIStatus.loading));
       final movies = await _databaseRepository.getFavourites();
 
+      // adding this line because data loads in so fast the loading widget
+      // looks like a bug
+      await Future.delayed(const Duration(milliseconds: 500));
+
       emit(state.copyWith(
         uiStatus: BlocStateUIStatus.loaded,
         movies: movies,

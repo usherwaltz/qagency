@@ -76,6 +76,10 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       moviesSet.addAll(moviesResponse.results);
       genresSet.addAll(genresResponse);
 
+      // adding this line because data loads in so fast the loading widget
+      // looks like a bug
+      await Future.delayed(const Duration(milliseconds: 500));
+
       emit(state.copyWith(
         uiStatus: BlocStateUIStatus.loaded,
         movies: moviesSet.toList(),

@@ -103,3 +103,9 @@ Replace "production" with "development" for development environment.
 - [connectivity_plus](https://pub.dev/packages/connectivity_plus) - Detecting device connection
 - [shared_preferences](https://pub.dev/packages/shared_preferences) - Quick storage tool for small user preferences
 - [rxdart](https://pub.dev/packages/rxdart) - Replacing `StreamController.broadcast()` with `BehaviorSubject()`
+
+## Feeling lazy?
+
+If you just want a quick preview of the app without the hassle of setting up the project on your machine, checkout the [Releases](https://github.com/usherwaltz/qagency/releases/tag/v1.0.0) page and you can find an `.apk` you can sideload on an Android device.
+
+Sadly, I do not have a paid Apple developer account so I could not create a build you can install directly from a browser.

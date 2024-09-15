@@ -65,15 +65,10 @@ class _BodyWidgetState extends State<BodyWidget> {
                   itemCount: state.movies.length + (!isEnd ? 1 : 0),
                   separatorBuilder: (context, index) => Gap(20.0.sp),
                   itemBuilder: (context, index) {
-                    if (index > state.movies.length - 1 && !isEnd) {
-                      return QConnectionWrapperWidget(
-                        buildWhenOffline: false,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: palette.primary,
-                          ),
-                        ),
-                      );
+                    if (index > state.movies.length - 1) {
+                      return !isEnd
+                          ? _buildLoading(palette.primary)
+                          : const SizedBox.shrink();
                     }
 
                     final movie = state.movies[index];
@@ -85,6 +80,14 @@ class _BodyWidgetState extends State<BodyWidget> {
               : const QNoDataWidget(),
         );
       },
+    );
+  }
+
+  Widget _buildLoading(Color color) {
+    return Center(
+      child: CircularProgressIndicator(
+        color: color,
+      ),
     );
   }
 }
