@@ -61,29 +61,29 @@ Replace "production" with "development" for development environment.
 
 ```json  
 {  
-	"version": "0.2.0", 
-	"configurations": [
-		{ 
-			"name": "Production", 
-			"request": "launch", 
-			"type": "dart", 
-			"program": "lib/main_production.dart", 
-			"args": [ 
-				"--flavor", 
-				"production" 
-			] 
-		}, 
-		{ 
-			"name": "Development", 
-			"request": "launch", 
-			"type": "dart", 
-			"program": "lib/main_development.dart", 
-			"args": [ 
-				"--flavor", 
-				"development" 
-			] 
-		} 
-	]
+   "version": "0.2.0", 
+   "configurations": [
+      { 
+         "name": "Production", 
+         "request": "launch", 
+         "type": "dart", 
+         "program": "lib/main_production.dart", 
+         "args": [
+            "--flavor", 
+            "production" 
+         ] 
+      }, 
+      { 
+         "name": "Development", 
+         "request": "launch", 
+         "type": "dart", 
+         "program": "lib/main_development.dart", 
+         "args": [ 
+            "--flavor", 
+            "development" 
+         ] 
+      } 
+   ]
 }
 ```  
 
